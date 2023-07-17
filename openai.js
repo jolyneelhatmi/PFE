@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const http = require('http');
 const { Configuration, OpenAIApi } = require("openai");
 const cors = require('cors');
 const app = express();
@@ -91,7 +92,8 @@ async function getResponse(instructions, previousQuestionsAndAnswers, newQuestio
       res.sendStatus(404);
     }
 });
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+const server = http.createServer(app);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
