@@ -12,7 +12,6 @@ const FREQUENCY_PENALTY = 0;
 const PRESENCE_PENALTY = 0.6;
 const MAX_CONTEXT_QUESTIONS = 10;
 const buttonRoutes = new Map();
-let userIdCounter = 1;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -65,8 +64,8 @@ async function getResponse(instructions, previousQuestionsAndAnswers, newQuestio
 
   app.post('/create-route', (req, res) => {
     const { route } = req.body;
-    const userId = `user${userIdCounter++}`;
-    const routePath = `/${userId}/${route}`;
+    
+    const routePath = `/${route}`;
   
     if (buttonRoutes.has(route)) {
       buttonRoutes.delete(route);
@@ -75,7 +74,7 @@ async function getResponse(instructions, previousQuestionsAndAnswers, newQuestio
     buttonRoutes.set(route, routePath);
     buttonRoutes.set(route, []);
   
-    res.json({ userId: userId, message: 'Route Created' }); 
+    res.json({ message: 'Route Created' }); 
   });
   
 
