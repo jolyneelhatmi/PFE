@@ -79,7 +79,7 @@ async function getResponse(instructions, previousQuestionsAndAnswers, newQuestio
   
 
 
-  app.post('/:apiKey/:route', async (req, res) => {
+  app.post('/:route', async (req, res) => {
     const { route } = req.params;
     if (buttonRoutes.has(route)) {
       const input = req.body.input;
